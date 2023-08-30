@@ -1,0 +1,63 @@
+{
+  "name": "nobitex-player",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nobitex-player",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/nobitex-player",
+        "outputPath": "dist/apps/nobitex-player"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/nobitex-player"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "nobitex-player:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "nobitex-player:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "nobitex-player:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "nobitex-player:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/nobitex-player"],
+      "options": {
+        "jestConfig": "apps/nobitex-player/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nobitex-player/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
