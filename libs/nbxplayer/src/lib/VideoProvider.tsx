@@ -198,7 +198,6 @@ const VideoProvider = (props: NbxPlayerProps) => {
           <SeekbarWrapper
             pr={2}
             pl={2}
-            uuo={10}
             container
             ref={seekerContainerRef}
             sx={{
