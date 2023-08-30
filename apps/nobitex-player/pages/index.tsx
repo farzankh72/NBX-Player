@@ -2,6 +2,7 @@ import VideoProvider from '../../../libs/nbxplayer/src/lib/VideoProvider'
 import { Container, Divider } from '@mui/material'
 
 export const Index = () => {
+  const a = ''
   return (
     <Container>
       <VideoProvider
