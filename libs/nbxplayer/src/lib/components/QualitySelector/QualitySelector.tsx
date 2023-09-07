@@ -6,9 +6,11 @@ const QualitySelector = () => {
   const { props } = useVideoContext()
 
   if (typeof props?.videoData === 'string') {
-    return <></>
+    return null
   } else if (Array.isArray(props?.videoData)) {
     return <ButtonSelector />
+  } else {
+    return null
   }
 }
 

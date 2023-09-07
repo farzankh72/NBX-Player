@@ -10,12 +10,16 @@ import SeekBar from './components/SeekBar'
 import PlayButton from './components/PlayButton'
 import SoundButton from './components/SoundButton'
 import FullScreenButton from './components/FullScreenButton'
-import useUserNetQuality from './api/hooks/useUserNetQuality'
 import SpeedSelector from './components/SpeedSelector/SpeedSelector'
 import QualitySelector from './components/QualitySelector/QualitySelector'
+
+import { Devices } from './api/Models/Devices'
 import { VideoModel } from './api/Models/VideoModel'
+import useUserNetQuality from './api/hooks/useUserNetQuality'
+import useDeviceSizeResponsive from './api/hooks/useDeviceSizeResponsive'
 
 interface VideoDataModel {
+  device?: Devices
   play?: () => void
   speedLvl?: number
   duration?: number
@@ -39,18 +43,20 @@ const SeekbarWrapper = styled(Grid)`
 `
 
 export interface NbxPlayerProps {
+  width: string
   poster?: string
-  width?: 'xl' | 'md' | 'sm' | 'lg'
   videoData: string | Array<VideoModel>
 }
 
 const VideoProvider = (props: NbxPlayerProps) => {
+  const { device } = useDeviceSizeResponsive(props.width || '1024')
+
   let timer: any
   const [duration, setDuration] = useState<number>(0)
   const [speedLvl, setSpeedLvl] = useState<number>(1)
   const [currentTime, setCurrentTime] = useState<number>(0)
-  const [videoTagRef, setVideoTagRef] = useState<HTMLVideoElement>(null)
-  const [sourceTagRef, setSourceTagRef] = useState<HTMLSourceElement>()
+  const [videoTagRef, setVideoTagRef] = useState<any>()
+  const [sourceTagRef, setSourceTagRef] = useState<any>()
   const [qualityLabel, setQualityLabel] = useState<string>('')
 
   const [isHovered, setIsHovered] = useState<boolean>(true)
@@ -59,9 +65,9 @@ const VideoProvider = (props: NbxPlayerProps) => {
 
   const netQuality = useUserNetQuality()
 
-  const containerRef = useRef()
-  const videoContainerRef = useRef(null)
-  const seekerContainerRef = useRef(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const videoContainerRef = useRef<HTMLDivElement | null>(null)
+  const seekerContainerRef = useRef<HTMLDivElement | null>(null)
 
   const onMouseHoverEnter = () => {
     setIsHovered(true)
@@ -75,6 +81,7 @@ const VideoProvider = (props: NbxPlayerProps) => {
         setShowSeekBar(false)
       }, 3500)
     }
+
     clearTimeout(timer)
   }
 
@@ -86,7 +93,7 @@ const VideoProvider = (props: NbxPlayerProps) => {
       timer = setTimeout(() => {
         setShowSeekBar(false)
         setIsMouseMoved(false)
-      }, 3500)
+      }, 5500)
     }
   }
 
@@ -134,7 +141,8 @@ const VideoProvider = (props: NbxPlayerProps) => {
   }
 
   const sourceCreator = () => {
-    videoTagRef.height = 300
+    videoTagRef.width = props.width
+    videoTagRef.height = +props.width / 1.7
     videoTagRef.ontimeupdate = () => {
       setCurrentTime(videoTagRef.currentTime)
     }
@@ -142,12 +150,15 @@ const VideoProvider = (props: NbxPlayerProps) => {
       setDuration(videoTagRef.duration)
     }
     videoTagRef.appendChild(sourceTagRef)
+    // @ts-ignore
     if (videoContainerRef?.current?.innerHTML) {
+      // @ts-ignore
       videoContainerRef.current.innerHTML = ''
     }
     videoTagRef.poster = props.poster || ''
 
     videoTagRef.load()
+    // @ts-ignore
     videoContainerRef?.current?.appendChild(videoTagRef)
     setDuration(videoTagRef.duration)
   }
@@ -175,6 +186,7 @@ const VideoProvider = (props: NbxPlayerProps) => {
         play,
         speed,
         props,
+        device,
         quality,
         soundOn,
         speedLvl,
@@ -201,8 +213,8 @@ const VideoProvider = (props: NbxPlayerProps) => {
             container
             ref={seekerContainerRef}
             sx={{
-              display: !showSeekBar ? 'none' : 'inherit',
               transition: 'all 5000ms ease-out',
+              display: !showSeekBar ? 'none' : 'inherit',
             }}
           >
             <Grid item xs={12}>

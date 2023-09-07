@@ -5,11 +5,13 @@ export const Index = () => {
   return (
     <Container>
       <VideoProvider
+        width={'320'}
         poster={'https://nobitex.ir/academy/api/file/download/ZtdNUgGvuyfuBoGuwEvi'}
         videoData={'https://nobitex.ir/academy/api/file/download/UjYJHOZYPKnuzopPluZe'}
       />
       <Divider />
       <VideoProvider
+        width={'400'}
         poster={'https://nobitex.ir/academy/api/file/download/ZtdNUgGvuyfuBoGuwEvi'}
         videoData={[
           {

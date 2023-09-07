@@ -78,7 +78,7 @@ const ButtonSelector = () => {
                   sx={{ color: speedLvl === item ? '#ffa726' : 'white' }}
                   key={index}
                   className={'typo'}
-                  onClick={() => speed(item)}
+                  onClick={() => speed && speed(item)}
                 >
                   {item === 1 ? 'N' : item}
                 </Typography>

@@ -7,9 +7,8 @@ import { useVideoContext } from '../VideoProvider'
 const FullScreenButton = () => {
   const { videoTagRef, containerRef } = useVideoContext()
 
-  const toggleFullScreen = () => {
+  const checkFullScreenMode = () => {
     const videoContainer = containerRef.current
-
     if (videoTagRef) {
       if (!document.fullscreenElement) {
         if (videoContainer.requestFullscreen) {
@@ -24,6 +23,9 @@ const FullScreenButton = () => {
         videoTagRef.style.height = '300px'
       }
     }
+  }
+  const toggleFullScreen = () => {
+    checkFullScreenMode()
   }
 
   return (
