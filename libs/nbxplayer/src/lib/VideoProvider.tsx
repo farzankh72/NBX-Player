@@ -9,6 +9,7 @@ import Timer from './components/Timer'
 import SeekBar from './components/SeekBar'
 import PlayButton from './components/PlayButton'
 import SoundButton from './components/SoundButton'
+import Questionnaire from './components/Questionnaire'
 import FullScreenButton from './components/FullScreenButton'
 import SpeedSelector from './components/SpeedSelector/SpeedSelector'
 import QualitySelector from './components/QualitySelector/QualitySelector'
@@ -20,8 +21,8 @@ import useDeviceSizeResponsive from './api/hooks/useDeviceSizeResponsive'
 
 interface VideoDataModel {
   device?: Devices
-  play?: () => void
   speedLvl?: number
+  play?: () => void
   duration?: number
   containerRef?: any
   currentTime?: number
@@ -45,6 +46,12 @@ const SeekbarWrapper = styled(Grid)`
 export interface NbxPlayerProps {
   width: string
   poster?: string
+  questionnaire?: {
+    template: any
+    onClose: boolean
+    opacity?: string
+    timeToDisplay: number
+  }
   videoData: string | Array<VideoModel>
 }
 
@@ -207,23 +214,7 @@ const VideoProvider = (props: NbxPlayerProps) => {
           onMouseMove={() => onMouseMove()}
         >
           <Box ref={videoContainerRef} />
-          <div
-            style={{
-              width: '95%',
-              height: device === 'MOBILE' ? '65%' : device === ' TABLET' ? '75%' : '85%',
-              backgroundColor: 'blue',
-              position: 'absolute',
-              zIndex: 1,
-              left: '50%',
-              top: '50%',
-              transform:
-                device === 'MOBILE'
-                  ? 'translate(-50%,-70%)'
-                  : device === ' TABLET'
-                  ? 'translate(-50%,-60%)'
-                  : 'translate(-50%,-55%)',
-            }}
-          />
+          <Questionnaire />
           <SeekbarWrapper
             pr={2}
             pl={2}
