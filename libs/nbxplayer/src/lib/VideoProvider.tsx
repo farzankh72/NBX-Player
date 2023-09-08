@@ -49,7 +49,7 @@ export interface NbxPlayerProps {
 }
 
 const VideoProvider = (props: NbxPlayerProps) => {
-  const { device } = useDeviceSizeResponsive(props.width || '1024')
+  const { device } = useDeviceSizeResponsive(props.width || '320')
 
   let timer: any
   const [duration, setDuration] = useState<number>(0)
@@ -141,7 +141,7 @@ const VideoProvider = (props: NbxPlayerProps) => {
   }
 
   const sourceCreator = () => {
-    videoTagRef.width = props.width
+    videoTagRef.width = props.width || '320'
     videoTagRef.height = +props.width / 1.7
     videoTagRef.ontimeupdate = () => {
       setCurrentTime(videoTagRef.currentTime)
@@ -207,6 +207,23 @@ const VideoProvider = (props: NbxPlayerProps) => {
           onMouseMove={() => onMouseMove()}
         >
           <Box ref={videoContainerRef} />
+          <div
+            style={{
+              width: '95%',
+              height: device === 'MOBILE' ? '65%' : device === ' TABLET' ? '75%' : '85%',
+              backgroundColor: 'blue',
+              position: 'absolute',
+              zIndex: 1,
+              left: '50%',
+              top: '50%',
+              transform:
+                device === 'MOBILE'
+                  ? 'translate(-50%,-70%)'
+                  : device === ' TABLET'
+                  ? 'translate(-50%,-60%)'
+                  : 'translate(-50%,-55%)',
+            }}
+          />
           <SeekbarWrapper
             pr={2}
             pl={2}

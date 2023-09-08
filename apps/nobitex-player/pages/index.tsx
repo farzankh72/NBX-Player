@@ -11,7 +11,13 @@ export const Index = () => {
       />
       <Divider />
       <VideoProvider
-        width={'400'}
+        width={'500'}
+        poster={'https://nobitex.ir/academy/api/file/download/ZtdNUgGvuyfuBoGuwEvi'}
+        videoData={'https://nobitex.ir/academy/api/file/download/UjYJHOZYPKnuzopPluZe'}
+      />
+      <Divider />
+      <VideoProvider
+        width={'700'}
         poster={'https://nobitex.ir/academy/api/file/download/ZtdNUgGvuyfuBoGuwEvi'}
         videoData={[
           {
