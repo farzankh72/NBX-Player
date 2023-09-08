@@ -1,6 +1,8 @@
-import { useVideoContext } from '../VideoProvider'
 import { useMemo } from 'react'
+
 import Box from '@mui/material/Box'
+
+import { useVideoContext } from '../VideoProvider'
 
 const Questionnaire = () => {
   const { device, props, currentTime, videoTagRef } = useVideoContext()
