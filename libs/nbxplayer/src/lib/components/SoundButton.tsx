@@ -6,12 +6,13 @@ import VolumeUp from '@mui/icons-material/VolumeUp'
 import VolumeMute from '@mui/icons-material/VolumeMute'
 
 const SoundButton = () => {
-  const { soundOn, videoTagRef } = useVideoContext()
+  const { soundOn, videoTagRef, loading } = useVideoContext()
   return (
     <Box alignSelf={'center'}>
       <IconButton
         size={'small'}
         onClick={soundOn}
+        disabled={loading}
         sx={{ backgroundColor: '#371d6660', color: 'white' }}
       >
         {videoTagRef?.volume === 1 ? (

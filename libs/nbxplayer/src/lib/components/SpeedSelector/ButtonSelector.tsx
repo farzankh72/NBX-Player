@@ -64,10 +64,10 @@ const Wrapper = styled(Box)`
 `
 
 const ButtonSelector = () => {
-  const { speed, speedLvl } = useVideoContext()
+  const { speed, speedLvl, loading } = useVideoContext()
   const speedArray = [0.5, 0.75, 1, 1.25, 1.5]
   return (
-    <Wrapper alignSelf={'center'}>
+    <Wrapper alignSelf={'center'} display={loading ? 'none' : 'inherit'}>
       <button className='Btn'>
         <Speed fontSize={'small'} className='svgIcon' />
         <span className='text'>

@@ -5,7 +5,7 @@ import Fullscreen from '@mui/icons-material/Fullscreen'
 import { useVideoContext } from '../VideoProvider'
 
 const FullScreenButton = () => {
-  const { videoTagRef, containerRef, props } = useVideoContext()
+  const { videoTagRef, containerRef, props, loading } = useVideoContext()
 
   const checkFullScreenMode = () => {
     const videoContainer = containerRef.current
@@ -19,7 +19,7 @@ const FullScreenButton = () => {
         videoTagRef.style.height = '100%'
       } else {
         if (document.exitFullscreen) {
-          document.exitFullscreen()
+          document.exitFullscreen().then()
         }
         videoTagRef.style.width = width
         videoTagRef.style.height = (+width / 1.7).toString()
@@ -34,6 +34,7 @@ const FullScreenButton = () => {
     <Box alignSelf={'center'}>
       <IconButton
         size={'small'}
+        disabled={loading}
         onClick={toggleFullScreen}
         sx={{ backgroundColor: '#371d6660', color: 'white' }}
       >

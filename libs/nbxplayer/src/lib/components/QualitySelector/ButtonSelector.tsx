@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import { styled, Typography } from '@mui/material'
 
 import { useVideoContext } from '../../VideoProvider'
+// @ts-ignore
 import gear from '../../public/assets/images/gear-quality.png'
 
 const QualityWrapper = styled(Box)`
@@ -106,10 +107,10 @@ const QualityWrapper = styled(Box)`
 `
 
 const ButtonSelector = () => {
-  const { props, quality, qualityLabel } = useVideoContext()
+  const { props, quality, qualityLabel, loading } = useVideoContext()
 
   return (
-    <QualityWrapper alignSelf={'center'}>
+    <QualityWrapper alignSelf={'center'} display={loading ? 'none' : 'inherit'}>
       <div className={'btn'}>
         <span>
           <Typography variant={'caption'}>{qualityLabel}</Typography>

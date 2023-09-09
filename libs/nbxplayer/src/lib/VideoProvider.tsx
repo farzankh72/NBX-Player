@@ -21,23 +21,27 @@ import useDeviceSizeResponsive from './api/hooks/useDeviceSizeResponsive'
 import PlayOnMainScreen from './components/PlayOnMainScreen'
 
 interface VideoDataModel {
-  device?: Devices
   speedLvl?: number
   play?: () => void
   loading?: boolean
-  duration?: number
   containerRef?: any
-  currentTime?: number
   soundOn?: () => void
+  duration: number | 0
   qualityLabel?: string
   props?: NbxPlayerProps
+  currentTime: number | 0
   seek?: (time: number) => void
   videoTagRef?: HTMLVideoElement
   speed?: (number: number) => void
+  device: Devices | Devices.DESKTOP
   quality?: (url: string, quality: string) => void
 }
 
-const VideoContext = createContext<VideoDataModel>({})
+const VideoContext = createContext<VideoDataModel>({
+  duration: 0,
+  currentTime: 0,
+  device: Devices.DESKTOP,
+})
 
 const SeekbarWrapper = styled(Grid)`
   bottom: 0;

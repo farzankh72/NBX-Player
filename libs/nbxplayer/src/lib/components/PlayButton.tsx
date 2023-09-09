@@ -6,12 +6,13 @@ import IconButton from '@mui/material/IconButton'
 import PlayArrow from '@mui/icons-material/PlayArrow'
 
 const PlayButton = () => {
-  const { play, videoTagRef } = useVideoContext()
+  const { play, videoTagRef, loading } = useVideoContext()
   return (
     <Box alignSelf={'center'}>
       <IconButton
         size={'small'}
         onClick={play}
+        disabled={loading}
         sx={{ backgroundColor: '#371d6660', color: 'white' }}
       >
         {videoTagRef?.paused ? <PlayArrow fontSize={'small'} /> : <Pause fontSize={'small'} />}
