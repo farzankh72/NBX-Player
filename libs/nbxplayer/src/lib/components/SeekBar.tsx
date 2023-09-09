@@ -74,7 +74,7 @@ const SeekBar = () => {
       valueLabelDisplay='auto'
       aria-label='Temperature'
       onChange={handleChangeSeekBar}
-      value={Math.round(currentTime)}
+      value={Math.round(currentTime || 0)}
       valueLabelFormat={valueTextTopSeekBar}
     />
   )

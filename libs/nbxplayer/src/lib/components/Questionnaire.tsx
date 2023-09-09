@@ -21,7 +21,7 @@ const Questionnaire = () => {
         props?.questionnaire && (
           <Box
             style={{
-              zIndex: 1,
+              zIndex: 2,
               top: '50%',
               left: '50%',
               width: '95%',

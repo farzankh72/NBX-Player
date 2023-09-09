@@ -18,21 +18,21 @@ export const Index = () => {
     <Container>
       <VideoProvider
         width={'320'}
-        questionnaire={{ template: temp, onClose: exit, timeToDisplay: 0 }}
+        questionnaire={{ template: temp, onClose: exit, timeToDisplay: 10 }}
         poster={'https://nobitex.ir/academy/api/file/download/ZtdNUgGvuyfuBoGuwEvi'}
         videoData={'https://nobitex.ir/academy/api/file/download/UjYJHOZYPKnuzopPluZe'}
       />
       <Divider />
       <VideoProvider
         width={'500'}
-        questionnaire={{ template: temp, onClose: exit, timeToDisplay: 0 }}
+        questionnaire={{ template: temp, onClose: exit, timeToDisplay: 5 }}
         poster={'https://nobitex.ir/academy/api/file/download/ZtdNUgGvuyfuBoGuwEvi'}
         videoData={'https://nobitex.ir/academy/api/file/download/UjYJHOZYPKnuzopPluZe'}
       />
       <Divider />
       <VideoProvider
         width={'700'}
-        questionnaire={{ template: temp, onClose: exit, timeToDisplay: 0 }}
+        questionnaire={{ template: temp, onClose: exit, timeToDisplay: 12 }}
         poster={'https://nobitex.ir/academy/api/file/download/ZtdNUgGvuyfuBoGuwEvi'}
         videoData={[
           {

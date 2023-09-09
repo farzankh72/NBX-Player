@@ -18,11 +18,13 @@ import { Devices } from './api/Models/Devices'
 import { VideoModel } from './api/Models/VideoModel'
 import useUserNetQuality from './api/hooks/useUserNetQuality'
 import useDeviceSizeResponsive from './api/hooks/useDeviceSizeResponsive'
+import PlayOnMainScreen from './components/PlayOnMainScreen'
 
 interface VideoDataModel {
   device?: Devices
   speedLvl?: number
   play?: () => void
+  loading?: boolean
   duration?: number
   containerRef?: any
   currentTime?: number
@@ -59,6 +61,8 @@ const VideoProvider = (props: NbxPlayerProps) => {
   const { device } = useDeviceSizeResponsive(props.width || '320')
 
   let timer: any
+  const [loading, setLoading] = useState<boolean>(true)
+
   const [duration, setDuration] = useState<number>(0)
   const [speedLvl, setSpeedLvl] = useState<number>(1)
   const [currentTime, setCurrentTime] = useState<number>(0)
@@ -182,7 +186,31 @@ const VideoProvider = (props: NbxPlayerProps) => {
           }
         })
       }
+
+      videoTagRef?.addEventListener('loadedmetadata', () => {
+        setLoading(false)
+      })
+
+      videoTagRef?.addEventListener('loadeddata', () => {
+        setLoading(false)
+      })
+
+      videoTagRef?.addEventListener('loadstart', () => {
+        setLoading(true)
+      })
       sourceCreator()
+
+      return () => {
+        videoTagRef?.removeEventListener('loadedmetadata', () => {
+          setLoading(false)
+        })
+        videoTagRef?.removeEventListener('loadeddata', () => {
+          setLoading(false)
+        })
+        videoTagRef?.removeEventListener('loadstart', () => {
+          setLoading(true)
+        })
+      }
     }
   }, [videoTagRef])
 
@@ -196,6 +224,7 @@ const VideoProvider = (props: NbxPlayerProps) => {
         device,
         quality,
         soundOn,
+        loading,
         speedLvl,
         duration,
         currentTime,
@@ -215,6 +244,7 @@ const VideoProvider = (props: NbxPlayerProps) => {
         >
           <Box ref={videoContainerRef} />
           <Questionnaire />
+          <PlayOnMainScreen />
           <SeekbarWrapper
             pr={2}
             pl={2}
