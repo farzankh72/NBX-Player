@@ -53,8 +53,11 @@ const NobitexSlider = styled(Slider)({
 const SeekBar = () => {
   const { currentTime, duration, seek } = useVideoContext()
 
-  const handleChangeSeekBar = (event, newValue) => {
-    seek(newValue)
+  const handleChangeSeekBar = (event: Event) => {
+    if (seek) {
+      // @ts-ignore
+      seek(event?.target?.value)
+    }
   }
 
   const valueTextTopSeekBar = (value: number) => {
